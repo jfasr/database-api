@@ -119,21 +119,21 @@ Este último faz uso de um sistema de cache eficiente.
   mas os nomes e o formatos das colunas podem variar linha-a-linha numa mesma tabela.
   Exemplos de bancos tabulares são Cassandra, Bigtable e DynamoDB
 
-  ### SGBDs particulares
-  
-  #### PostgreSQL
+## SGBDs particulares
 
-  #### Oracle 23c
+### PostgreSQL
 
-  #### Cache Database
+### Oracle 23c
 
-  #### Neo4J
+### Cache Database
 
-  #### SQL Server
+### Neo4J
 
-  #### Firebase
+### SQL Server
 
-  #### MongoDB
+### Firebase
 
-  #### Redis
+### MongoDB
+
+### Redis
 
