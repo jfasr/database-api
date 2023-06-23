@@ -181,12 +181,9 @@ sistema de cache podia ser aproveitada: [Instagram](https://instagram-engineerin
 
 - **Database System Concepts** (7th ed.). Abraham Silberschatz, Henry F. Korth, S. Sudarshan.
 McGraw-Hill Education, 2020.
-- **NoSQL**. Wikipedia, acessado em junho de 2023. Disponível em
-  [`https://en.wikipedia.org/wiki/NoSQL`](https://en.wikipedia.org/wiki/NoSQL)
-- **Redis Stack**. Redis.io, acessado em junho de 2023. Disponível em
-  [`https://redis.io/docs/stack/`](https://redis.io/docs/stack/)
+- **NoSQL**. Wikipedia, acessado em junho de 2023. Disponível [aqui](https://en.wikipedia.org/wiki/NoSQL)
+- **Redis Stack**. Redis.io, acessado em junho de 2023. Disponível [aqui](https://redis.io/docs/stack/)
 - **The Infrastructure Behind Twitter: Scale**. Mazdak Hashemi. Twitter Engineering, 2017.
-  Disponível em
-  [`https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale`](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale)
+  Disponível [aqui](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale)
 - **Storing hundreds of millions of simple key-value pairs in Redis**. Mike Krieger.
-  Instagram Engineering, Medium, 2011.
+  Instagram Engineering, Medium, 2011. Disponível [aqui](https://instagram-engineering.com/storing-hundreds-of-millions-of-simple-key-value-pairs-in-redis-1091ae80f74c)
