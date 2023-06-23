@@ -121,6 +121,9 @@ Este último faz uso de um sistema de cache eficiente.
 
 ## SGBDs particulares
 
+Apresentamos as principais características, modelos de dados e aplicações de alguns SGBDs
+particulares.
+
 ### PostgreSQL
 
 ### Oracle 23c
@@ -133,7 +136,57 @@ Este último faz uso de um sistema de cache eficiente.
 
 ### Firebase
 
+O sucesso da computação em nuvem permitiu a oferta de vários serviços, sejam eles de
+computação, armazenamento ou monitoramento. Um dos serviços oferecidos é o BaaS (*Backend as
+a Service*), que permite delegar à plataforma nuvem muitas das atividades associadas com a
+lógica backend de serviços web.
+
+Uma dessas plataformas, a GCP (*Google Cloud Platform*) oferece a Firebase, um conjunto de
+serviços BaaS. Um dos serviços cuida especificamente do banco de dados de uma aplicação Web. 
+
 ### MongoDB
+
+Um dos melhores representantes da categoria NoSQL é o MongoDB, um dos bancos de dados
+baseados em documentos mais avançados da atualidade. O MongoDB 
 
 ### Redis
 
+Uma das alternativas de armazenamento mais populares entre desenvolvedores, o banco Redis
+faz parte da categoria NoSQL, usando o modelo de dados Chave-Valor, porém com um sistema de
+cache eficiente.
+
+Primeiramente, é importante entender que o "valor" no modelo chave-valor adotado por Redis
+não está limitado a tipos primitivos que programadores estão acostumados (inteiros, floats,
+chars), mas embarca estruturas de dados como listas, hashes, conjuntos, hyperlogslogs,
+entre outros. Os dados que essas estruturas armazenam estão sempre na memória RAM e no
+cache. Isso difere da maioria dos SGBDs tradicionais, que fazem uso de árvores-B
+representadas no disco rígido, que é mais lento que a memória principal em ordens de
+magnitude.
+
+Redis foi construído usando uma arquitetura cliente-servidor. O servidor interno do Redis
+faz algumas operações para persistir os dados no disco, de tal maneira que a eficiência não
+seja muito prejudicada. Veja que ainda existe um pequeno risco de não-persistência dos
+dados. Aplicações onde tal característica seja crítica não são apropriadas ao banco Redis.
+
+Veja que como Redis mapeia chaves para estruturas de dados, é completamente possível que
+esse mapeamento também ocorra para outras estruturas que servem de suporte para outros
+modelos NoSQL: Grafos (RedisGraph), documentos (RedisJSON), séries temporais, etc. O
+conjunto dessas e outras extensões sobre Redis é chamado de *Redis Stack*.
+
+Inicialmente, Redis foi muito utilizado em aplicações onde a escalabilidade devido ao seu
+sistema de cache podia ser aproveitada: [Instagram](https://instagram-engineering.com/storing-hundreds-of-millions-of-simple-key-value-pairs-in-redis-1091ae80f74c), 
+[Twitter](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale), entre outros.
+
+## Referências
+
+- **Database System Concepts** (7th ed.). Abraham Silberschatz, Henry F. Korth, S. Sudarshan.
+McGraw-Hill Education, 2020.
+- **NoSQL**. Wikipedia, acessado em junho de 2023. Disponível em
+  [`https://en.wikipedia.org/wiki/NoSQL`](https://en.wikipedia.org/wiki/NoSQL)
+- **Redis Stack**. Redis.io, acessado em junho de 2023. Disponível em
+  [`https://redis.io/docs/stack/`](https://redis.io/docs/stack/)
+- **The Infrastructure Behind Twitter: Scale**. Mazdak Hashemi. Twitter Engineering, 2017.
+  Disponível em
+  [`https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale`](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale)
+- **Storing hundreds of millions of simple key-value pairs in Redis**. Mike Krieger.
+  Instagram Engineering, Medium, 2011.
