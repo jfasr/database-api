@@ -10,3 +10,9 @@
 [submodule "ativs/joao-ativ1"]
 	path = ativs/joao-ativ1
 	url = git@github.com:jfasr/ativ1-bd.git
+[submodule "ativ1/joao-ativ1"]
+	path = ativ1/joao-ativ1
+	url = git@github.com:jfasr/ativ1-bd.git
+[submodule "ativ1/pedro-ativ1"]
+	path = ativ1/pedro-ativ1
+	url = git@github.com:Pedro-V/ativ1-bd.git
