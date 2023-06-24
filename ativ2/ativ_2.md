@@ -138,14 +138,39 @@ particulares.
 Um SGBD do paradigma NoSQL, adotando o modelo baseado em grafos, onde a unidade fundamental
 de dados armazenados são nós, arestas e atributos de ambos. O Neo4j é escrito em Java (daí o
 4j), com o objetivo de ser o principal SGBD baseado em grafos. 
+Neo4j vem com uma linguagem de consulta adaptada para seu modelo de dados, a Cypher.
 
-Neo4j vem com uma linguagem de consulta adaptada para seu modelo de dados, a Cypher. Um
-nó, ou vértice, pode conter uma quantidade um número arbitrário de propriedades (pares
+Um nó, ou vértice, pode conter uma quantidade um número arbitrário de propriedades (pares
 chave-valor), além de terem 0 ou mais rótulos, que ajudam a identificar papéis específicos
-no minimundo modelado pelo banco.
+no minimundo modelado pelo banco.  Toda aresta num grafo do Neo4j é direcionada e tem um
+"tipo de relação". Arestas também podem ter propriedades.
 
-Toda aresta num grafo do Neo4j é direcionada e tem um "tipo de relação". Arestas também
-podem ter propriedades.
+![Um grafo que modela o minimundo da indústria de cinema](https://neo4j.com/docs/getting-started/_images/matrix_whiteboard_model3-arr.svg){width=500 height=500}
+
+Perceba que no exemplo da figura, dois vértices com o mesmo rótulo - ator - podem ter
+diferentes propriedades, ou de diferentes tipos, etc. A quebra da rigidez estrutura do
+modelo relacional permite um esquema mais flexível para representar os dados.
+
+Usar o grafo como modelo de dados permite eliminar joins -- muito comuns no contexto
+relacional -- atravessando o grafo coletando as informações necessárias para
+determinada consulta. 
+
+A linguagem de consulta, Cypher, é inspirada em SQL e adaptada para trabalhar com o modelo
+baseado em grafos. É uma linguagem única no sentido de que as consultas são feitas usando um
+apelo visual muito forte, e se baseiam fundamental na abstração de **padrão**, que são
+representação de relacionamentos entre nós. De maneira geral, um padrão em Cypher é da forma
+`(nós-[se_conectam_com]->(outrosNós)`. Para o exemplo de atores e filmes acima, o padrão
+"Tom Hanks atuou em Cloud Atlas" poderia ser escrito como:
+
+```SQL
+hanks_movie = (Person {name: "Tom Hanks"})-[ACTED_IN]->(m:Movie {title: "Cloud Atlas"})
+// cria essa relação no banco
+CREATE hanks_movie
+// encontra todos os títulos de filmes que o Tom Hanks atuou
+// e o papel que ele fez em cada
+MATCH (Person {name: "Tom Hanks"})-[r:ACTED_IN]->(m:Movie)
+RETURN m.title, r.roles
+```
 
 Algumas das empresas e aplicações que [usam](https://neo4j.com/customers/)
 Neo4j são eBay, Comcast e NASA.
@@ -316,7 +341,9 @@ McGraw-Hill Education, 2020.
   Disponível [aqui](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale)
 - **Storing hundreds of millions of simple key-value pairs in Redis**. Mike Krieger.
   Instagram Engineering, Medium, 2011. Disponível [aqui](https://instagram-engineering.com/storing-hundreds-of-millions-of-simple-key-value-pairs-in-redis-1091ae80f74c)
-- **Firebase website**. Disponível [aqui](https://firebase.google.com/)
+- **Firebase website**. Acessado em Junho de 2023. Disponível [aqui](https://firebase.google.com/)
 - **Cloud Firestore vs the Realtime Database: Which one do I use?**. Todd Kerpelman. The
   Firebase Blog, 2017. Disponível
   [aqui](https://firebase.blog/posts/2017/10/cloud-firestore-for-rtdb-developers)
+- **Neo4j Documentation**. Acessado em Junho de 2023. Disponível
+  [aqui](https://neo4j.com/docs/)
