@@ -6,6 +6,9 @@
 * Pedro Vinícius de Araújo Barreto
 * João Filipe de Araújo Santos Rezende
 
+O código fonte desse documento está disponível
+[aqui](https://github.com/jfasr/database-api/tree/main/ativ2).
+
 ## Sistemas de Gerenciamento de Banco de Dados (SGBD) e modelos de dados
 
 No começo do uso dos computadores, foi enxergado o potencial dessas máquinas de armazenarem
@@ -130,24 +133,147 @@ particulares.
 
 ### Cache Database
 
-### Neo4J
+### Neo4j
+
+Um SGBD do paradigma NoSQL, adotando o modelo baseado em grafos, onde a unidade fundamental
+de dados armazenados são nós, arestas e atributos de ambos. O Neo4j é escrito em Java (daí o
+4j), com o objetivo de ser o principal SGBD baseado em grafos. 
+
+Neo4j vem com uma linguagem de consulta adaptada para seu modelo de dados, a Cypher. Um
+nó, ou vértice, pode conter uma quantidade um número arbitrário de propriedades (pares
+chave-valor), além de terem 0 ou mais rótulos, que ajudam a identificar papéis específicos
+no minimundo modelado pelo banco.
+
+Toda aresta num grafo do Neo4j é direcionada e tem um "tipo de relação". Arestas também
+podem ter propriedades.
+
+Algumas das empresas e aplicações que [usam](https://neo4j.com/customers/)
+Neo4j são eBay, Comcast e NASA.
 
 ### SQL Server
 
 ### Firebase
 
 O sucesso da computação em nuvem permitiu a oferta de vários serviços, sejam eles de
-computação, armazenamento ou monitoramento. Um dos serviços oferecidos é o BaaS (*Backend as
-a Service*), que permite delegar à plataforma nuvem muitas das atividades associadas com a
-lógica backend de serviços web.
+computação, armazenamento ou monitoramento. Um das categorias de serviços oferecidos
+é o BaaS (*Backend as a Service*), que permite delegar à plataforma nuvem muitas das
+atividades associadas com a lógica backend de serviços web.
 
 Uma dessas plataformas, a GCP (*Google Cloud Platform*) oferece a Firebase, um conjunto de
-serviços BaaS. Um dos serviços cuida especificamente do banco de dados de uma aplicação Web. 
+serviços BaaS, com um foco particular em desenvolvimento mobile. Existem 2 produtos
+na Firebase dedicados especificamente a, ordenados em ordem
+de lançamento:
+
+- Realtime Database: O primeiro produto da Firebase, consiste num banco de dados NoSQL
+  pouquíssimo estruturado (é literalmente uma grande árvore JSON), hospedado na nuvem 
+  da Google, e com foco na sincronização 
+  dos dados entre diferentes clientes interessados em uma determinada parte dos dados.
+  Permite obter informações de quando os clientes estão ou não onlines, quando
+  modificam dados (com ou sem conexão, fazendo uso de cache local para posterior
+  sincronização) e também quando fazem escritas e leituras frequentes de maneira
+  síncrona com baixa tolerância para latência.
+  
+- Cloud Firestore: Segue o modelo NoSQL baseado em documentos e em
+  agrupamentos de documentos chamados coleções, porém com uma melhor estruturação dos dados. 
+  Portanto, consultas podem ser feitas de
+  maneira mais fácil e rápida do que no Realtime Database, fazendo uso de uma linguagem
+  declarativa similar à SQL, que permite técnicas de consulta, ordenação e transações
+  avançadas. A Firestore também se assemelha ao modelo hierárquico legado,
+  pois as relações entre diferentes documentos é feita utilizando uma estrutura de árvore.
+  Isso permite a realização de consultas superficiais, ou seja, se temos um nó que contêm um
+  documento que aponta para um milhão de outros documentos, podemos escrever uma consulta para
+  retornar apenas as informações do nó raiz.
+  
+![Organização Hierárquica de Coleções na Firestore](https://4.bp.blogspot.com/-Y00xCgoXO1w/XFHyseJrmiI/AAAAAAAADVE/ubX21uWbsOU0s989Mxz0axRFOZyWd9vVgCLcBGAs/s1600/image6.png){width=500 height=500}
+
+  Assim como seu "produto irmão", a Firestore também hospeda os dados na nuvem e tem
+  capabilidades de sincronização entre diferentes clientes.
+
+Firebase tem sido a plataforma de escolha de muitos desenvolvedores que querem abstrair a
+construção do backend de sua aplicação. É usada por aplicações como Duolingo, The New York
+Times, Lyft, entre outros.
+
+É importante dizer que a Google já sofreu [contestações na justiça](https://www.reuters.com/article/us-alphabet-google-privacy-lawsuit-idUSKCN24F2N4)
+por não respeitar a privacidade de usuários da plataforma.
 
 ### MongoDB
 
 Um dos melhores representantes da categoria NoSQL é o MongoDB, um dos bancos de dados
-baseados em documentos mais avançados da atualidade. O MongoDB 
+baseados em documentos mais avançados da atualidade. Foi desenvolvido visando ser fácil de
+usar, escalável (de maneira distribuída), com muitas features mas sem sacrificar velocidade.
+
+O modelo de dados usado pelo MongoDB tem como elemento fundamental o documento, que difere
+do elemento fundamental do modelo relacional, a tupla. O documento é um conjunto ordenado de
+chaves que mapeiam para certos valores (incluindo outros documentos). O resultado é maior
+expressividade (e escalabilidade) dos dados armazenados. Uma coleção de documentos então
+pode ser vista como uma tabela com um esquema dinâmico, pois não precisam seguir uma
+estrutura rígida. Todo documento é identificado unicamente numa coleção por uma chave `_id`.
+
+Documentos podem ser consultados usando métodos clássicos que relembram SQL, mas também
+podem fazer uso de pipelines de agregações, que são uma sequência de funções chamadas
+estágios. A entrada e a saída de um estágio quase sempre é uma coleção. Isso permite que a
+saída de uma função seja a entrada de outra.
+
+Por exemplo, uma pipeline de agregação para encontrar estatísticas de consumo e detalhes dos
+maiores clientes de uma coleção de pedidos seria:
+
+```python
+db.orders.aggregate([
+  {
+    $match: {
+      orderDate: { $gte: ISODate("2023-01-01T00:00:00Z") } 
+    }
+  },
+  {
+    $group: {
+      _id: "$customerId",
+      totalOrders: { $sum: 1 }, 
+      totalAmount: { $sum: "$totalAmount" }, 
+      lastOrderDate: { $max: "$orderDate" } 
+    }
+  },
+  {
+    $sort: {
+      totalAmount: -1 
+    }
+  },
+  {
+    $limit: 10 
+  },
+  {
+    $lookup: {
+      from: "customers",
+      localField: "_id",
+      foreignField: "_id",
+      as: "customerDetails" 
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      customerId: "$_id",
+      totalOrders: 1,
+      totalAmount: 1,
+      lastOrderDate: 1,
+      customerName: { $arrayElemAt: ["$customerDetails.name", 0] }, 
+      customerEmail: { $arrayElemAt: ["$customerDetails.email", 0] } 
+    }
+  }
+])
+```
+
+Finalmente, o método que o MongoDB utiliza para ser escalável horizontalmente é
+a utilização de *sharding*,
+ou fragmentos. Basicamente, uma coleção de muito grande pode ser dividida em
+fragmentos, e aplicações podem realizar consultas através de interfaceamento com um
+componente chamado roteador, que sincroniza entre os diferentes fragmentos e os documentos
+que eles possuem.
+
+Algumas aplicações que utilizam MongoDB são
+[Forbes](https://www.mongodb.com/blog/post/forbes-cloud-migration-helps-worlds-biggest-media-brand-continue-standard-digital-innovation),
+[Thermo Fisher](https://www.mongodb.com/blog/post/thermo-fisher-moves-into-the-cloud-with-mongodb-atlas-and-aws)
+e
+[Toyota](https://www.mongodb.com/blog/post/video-toyota-industry-40-creating-smart-factory-moving-from-monolithic-code-base-microservices-mongodb-atlas-microsoft-azure).
 
 ### Redis
 
@@ -176,14 +302,21 @@ conjunto dessas e outras extensões sobre Redis é chamado de *Redis Stack*.
 Inicialmente, Redis foi muito utilizado em aplicações onde a escalabilidade devido ao seu
 sistema de cache podia ser aproveitada: [Instagram](https://instagram-engineering.com/storing-hundreds-of-millions-of-simple-key-value-pairs-in-redis-1091ae80f74c), 
 [Twitter](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale), entre outros.
+Além disso tudo, é software livre e de código aberto.
 
 ## Referências
 
-- **Database System Concepts** (7th ed.). Abraham Silberschatz, Henry F. Korth, S. Sudarshan.
+- **Database System Concepts -  7th ed** Abraham Silberschatz, Henry F. Korth, S. Sudarshan.
 McGraw-Hill Education, 2020.
+- **MongoDB: The Definitive Guide - 3rd ed**. Shannon Bradshaw, Eoin Brazil, Kristina
+  Chodorow. O'Reilly Media, Inc, 2019.
 - **NoSQL**. Wikipedia, acessado em junho de 2023. Disponível [aqui](https://en.wikipedia.org/wiki/NoSQL)
 - **Redis Stack**. Redis.io, acessado em junho de 2023. Disponível [aqui](https://redis.io/docs/stack/)
 - **The Infrastructure Behind Twitter: Scale**. Mazdak Hashemi. Twitter Engineering, 2017.
   Disponível [aqui](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale)
 - **Storing hundreds of millions of simple key-value pairs in Redis**. Mike Krieger.
   Instagram Engineering, Medium, 2011. Disponível [aqui](https://instagram-engineering.com/storing-hundreds-of-millions-of-simple-key-value-pairs-in-redis-1091ae80f74c)
+- **Firebase website**. Disponível [aqui](https://firebase.google.com/)
+- **Cloud Firestore vs the Realtime Database: Which one do I use?**. Todd Kerpelman. The
+  Firebase Blog, 2017. Disponível
+  [aqui](https://firebase.blog/posts/2017/10/cloud-firestore-for-rtdb-developers)

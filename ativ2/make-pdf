@@ -1,0 +1,17 @@
+#!/bin/bash
+# execute with ./make-pdf
+
+# Check if pandoc binary is present
+if command -v pandoc >/dev/null 2>&1; then
+    echo "pandoc found. Compiling Markdown to PDF..."
+    
+    input_file="ativ_2.md"
+    output_file="${input_file%.md}.pdf"
+    
+    # Convert Markdown to PDF using pandoc
+    pandoc "$input_file" -V linkcolor:blue -o "$output_file"
+    
+    echo "Compilation complete. PDF file saved as: $output_file"
+else
+    echo "pandoc is not installed. Please install pandoc to compile Markdown files to PDF."
+fi
