@@ -129,6 +129,13 @@ particulares.
 
 ### PostgreSQL
 
+O SGBD objeto-relacional [mais](https://survey.stackoverflow.co/2022#most-popular-technologies-database-prof) usado pelos profissionais, completamente código aberto, esse é o PostgreSQL. Toda essa popularidade tem seus motivos, podemos citar:
+
+- Serializable Snapshot Isolation (SSI): Quando lidamos com transações, especialmente de capital, a segurança é um pilar indiscutível. Porém, métodos que tendem a ser mais restritos acabam diminuindo a performance do SGBD. O Postgres implementa o SSI para tratar as transações como se estivessem ocorrendo em série e de forma isoladas, assim o mecanismo tenta determinar onde as anomalias (conflitos de leitura-escrita) podem acontecer, é utilizado um grafo serializado pra isso. O sistema é mais eficiente que os modelos de locks tradicionais pois é menos restrito, permite que alguns conflitos aconteçam desde que não que sejam nas estruturas perigosas (nós do grafo marcados como potencial anomalia)
+
+- Procedural Languages (PLs): Além da SQL e C (*o Postgres é implementado em partes em C*) o SGBD permite que o usuário defina suas próprias funções em outras linguagens. Quem faz esse trabalho de "tradução de linguagens" não é o banco de dados em si, existe um encarregado que é uma própria função em C. O SGBD atualmente provê até quatro built-in PLs: pgSQL, Tcl, Perl e Python. Embora, existem outras PLs disponíveis que podem ser instaladas, além de o usuário poder criar sua própria Procedural Language.
+
+
 ### Oracle 23c
 
 ### Cache Database
@@ -347,3 +354,6 @@ McGraw-Hill Education, 2020.
   [aqui](https://firebase.blog/posts/2017/10/cloud-firestore-for-rtdb-developers)
 - **Neo4j Documentation**. Acessado em Junho de 2023. Disponível
   [aqui](https://neo4j.com/docs/)
+- **PostgreSQL Documentation**. Acessado em Junho de 2023. Disponível [aqui](https://www.postgresql.org/docs/current/)
+- **Which Major Companies Use PostgreSQL? What Do They Use It for?**. Jakub Romanowski, 2020. Disponível [aqui](https://learnsql.com/blog/companies-that-use-postgresql-in-business/)
+
