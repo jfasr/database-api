@@ -152,7 +152,7 @@ O Oracle23c é a mais recente versão do banco de dados da Oracle. É um banco d
 
 Um dos features inovador que o Oracle 23c traz é chamado de **Dualidade JSON Relacional** (JSON Relational Duality). Basicamente a empresa buscou trazer a unificação de vários modelos de dados. Sabemos que o modelo relacional pode se tornar mais complicado para trabalhar quando tratamos de tipos de dados complexos, já que os dados do mundo real nem sempre chegam em linhas e colunas.
 O que o JSON Relational Duality busca é a união do modelo de documentos com o relacional, aproveitando a melhor eficiência em armazenamento do relacional, com o melhor acesso que o modelo de documentos tem.
-![Armazenados em linhas - Acessados como documentos JSON](https://i.im.ge/2023/06/27/07c2Cm.oracle.jpg){width=500 height=500}
+![Armazenados em linhas - Acessados como documentos JSON](https://imgur.com/a/zvh8zUS){width=500 height=500}
 
 Outro ponto de diferencial desse banco de dados são os Procedimentos Armazenados em JavaScript (JavaScript Stored Procedures) que facilitam a criação de aplicações em JS que utilizam do BD, com o principal ponto aqui sendo a diminuição de consultas ao banco de dados, já que os procedimentos estão escritos **no** banco de dados.
 
@@ -241,7 +241,7 @@ FROM OPENJSON(@json) WITH (
 OUTER APPLY OPENJSON(skills) WITH (skill NVARCHAR(8) '$');
 ```
 
-![A tabela resultante](https://i.im.ge/2023/06/27/07cUex.Screenshot-1-svg.png)
+![A tabela resultante](https://imgur.com/a/v0h6kDT)
 
 Apesar de estar sob comando da Microsoft, existem versões de testes mais limitadas gratuitas. Para uma aplicação do mundo real tende a ser necessário uma assinatura. Uma das grandes desvantagens em usar o SQL Server é a sua pouca disponibilidade nos SOs (Apenas Windows e Linux). Em contrapartida, a falta de flexibilidade tanto nos sistemas operacionais como nos tipos de dados suportados implica na grande velocidade de performance.
 
