@@ -32,13 +32,13 @@ governos.
 
 Os programas para lidar com os dados podem cumprir as mais variadas funções, como:
 
-* Implementação de baixo nível das estruturas de dados (Árvores B, Grafos, etc) no sistema 
-de arquivos do Sistema Operacional do computador, buscando performance e confiabilidade.
+* Implementação de baixo nível das estruturas de dados (Árvores B, Grafos, etc) no sistema
+de arquivos do Sistema Operacional do computador, buscando performance e confiabilidade
 * Definição de estruturas lógicas (tabelas, hierarquias, etc) sobre as quais os dados
 serão representados
 * Manipulação e atualização das estruturas já definidas
 * Garantia de restrições de segurança ou consistência
-* Estabelecer uma interface básica de conexão entre os programas supracitados com as 
+* Estabelecer uma interface básica de conexão entre os programas supracitados com as
 aplicações interessadas no consumo dos dados
 
 SGBDs modernos buscam um fundamento, ou modelo, sob o qual o banco será abstraído e,
@@ -66,17 +66,17 @@ Esse modelo é o resultado da evolução de dois modelos anteriores:
 
 * Relacional, criado por Edgar Codd, baseado na teoria matemática de relações,
 explicitando a estrutura (ou esquema) de cada relação. Esse modelo teve um fortíssimo sucesso,
-eventualmente superados os modelos hierárquico e de rede. Junto com o advento do modelo
+eventualmente superando os modelos hierárquico e de rede. Junto com o advento do modelo
 relacional, uma linguagem de dados declarativa foi criada para prover as utilidades de definição
 e manipulação dos SGBDs que seguiram esse modelo, a **SQL**.
 * Orientado a objetos: Com o advento de linguagens de programação orientadas a objetos,
-que permitiam a criação de componentes de software que encapsulavam informações desnecessárias
+que permitiam a criação de componentes de software que encapsulavam informações
 e expunham métodos de comunicação entre si, não demorou muito para que acadêmicos e profissionais
 buscassem trazer esse paradigma para o campo dos banco de dados, provendo suporte para classes,
 objetos e herança. 
 
 O modelo relacional passou a ser fortemente criticado devido ao seu baixo suporte pelo paradigma
-Orientado a Objetos, levando à uma fusão dos paradigmas existentes em um novo que trazia tanto
+Orientado a Objetos, levando à uma fusão dos paradigmas existentes em um novo que trazia
 a possibilidade de criação de relações e de seus esquemas, tendo o uso do SQL para sua definição
 e manipulação, mas também permitia a modelagem das relações como classes, de tal forma que os 
 atributos dos objetos passaram a ser equivalente às colunas nas tabelas relacionais, e cada 
@@ -86,7 +86,6 @@ ferramentas para fazer o mapeamento objeto-relacional, os *ORM*s.
 
 Os principais SGBDs objeto-relacionais da atualidade são Microsoft SQL Server, Oracle Database,
 MySQL, PostgreSQL e MariaDB.
-
 
 ### NoSQL
 
@@ -132,7 +131,6 @@ particulares.
 O SGBD objeto-relacional [mais usado](https://survey.stackoverflow.co/2022#most-popular-technologies-database-prof) pelos profissionais, completamente código aberto, esse é o PostgreSQL. Toda essa popularidade tem seus motivos, podemos citar:
 
 - Serializable Snapshot Isolation (SSI): Quando lidamos com transações, especialmente de capital, a segurança é um pilar indiscutível. Porém, métodos que tendem a ser mais restritos acabam diminuindo a performance do SGBD. O Postgres implementa o SSI para tratar as transações como se estivessem ocorrendo em série e de forma isolada, assim o mecanismo tenta determinar onde as anomalias (conflitos de leitura-escrita) podem acontecer, é utilizado um grafo serializado pra isso. O sistema é mais eficiente que os modelos de locks tradicionais pois é menos restrito, permite que alguns conflitos aconteçam desde que não que sejam nas estruturas perigosas (nós do grafo marcados como potencial anomalia)
-
 - Procedural Languages (PLs): Além da SQL e C (*o Postgres é implementado em partes em C*) o SGBD permite que o usuário defina suas próprias funções em outras linguagens. Quem faz esse trabalho de "tradução de linguagens" não é o banco de dados em si, existe um encarregado que é uma própria função em C. O SGBD atualmente provê até quatro built-in PLs: pgSQL, Tcl, Perl e Python. Embora, existem outras PLs disponíveis que podem ser instaladas, além de o usuário poder criar sua própria Procedural Language.
 
 Flexibilidade, escalabilidade e velocidade. Essas e outras características fazem o
@@ -398,6 +396,7 @@ conjunto dessas e outras extensões sobre Redis é chamado de *Redis Stack*.
 Inicialmente, Redis foi muito utilizado em aplicações onde a escalabilidade devido ao seu
 sistema de cache podia ser aproveitada: [Instagram](https://instagram-engineering.com/storing-hundreds-of-millions-of-simple-key-value-pairs-in-redis-1091ae80f74c), 
 [Twitter](https://blog.twitter.com/engineering/en_us/topics/infrastructure/2017/the-infrastructure-behind-twitter-scale), entre outros.
+
 Além disso tudo, é software livre e de código aberto.
 
 ## Referências
