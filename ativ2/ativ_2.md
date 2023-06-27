@@ -129,16 +129,45 @@ particulares.
 
 ### PostgreSQL
 
-O SGBD objeto-relacional [mais](https://survey.stackoverflow.co/2022#most-popular-technologies-database-prof) usado pelos profissionais, completamente código aberto, esse é o PostgreSQL. Toda essa popularidade tem seus motivos, podemos citar:
+O SGBD objeto-relacional [mais usado](https://survey.stackoverflow.co/2022#most-popular-technologies-database-prof) pelos profissionais, completamente código aberto, esse é o PostgreSQL. Toda essa popularidade tem seus motivos, podemos citar:
 
 - Serializable Snapshot Isolation (SSI): Quando lidamos com transações, especialmente de capital, a segurança é um pilar indiscutível. Porém, métodos que tendem a ser mais restritos acabam diminuindo a performance do SGBD. O Postgres implementa o SSI para tratar as transações como se estivessem ocorrendo em série e de forma isoladas, assim o mecanismo tenta determinar onde as anomalias (conflitos de leitura-escrita) podem acontecer, é utilizado um grafo serializado pra isso. O sistema é mais eficiente que os modelos de locks tradicionais pois é menos restrito, permite que alguns conflitos aconteçam desde que não que sejam nas estruturas perigosas (nós do grafo marcados como potencial anomalia)
 
 - Procedural Languages (PLs): Além da SQL e C (*o Postgres é implementado em partes em C*) o SGBD permite que o usuário defina suas próprias funções em outras linguagens. Quem faz esse trabalho de "tradução de linguagens" não é o banco de dados em si, existe um encarregado que é uma própria função em C. O SGBD atualmente provê até quatro built-in PLs: pgSQL, Tcl, Perl e Python. Embora, existem outras PLs disponíveis que podem ser instaladas, além de o usuário poder criar sua própria Procedural Language.
 
+Flexibilidade, escalabilidade e velocidade. Essas e outras características fazem o
+PostgreSQL ser a escolha de grandes empresas que usam um grande contingente de 
+dados, além de ser open-source. Como também por ser fácil de usar e ter a 
+portabilidade das Procedural Languages, pequenas empresas com devs pouco 
+experientes em banco de dados também acabam adotando o PostgreSQL.
+
+Algumas empresas que usam PostgreSQL são [Spotify](https://engineering.atspotify.com/2013/03/backend-infrastructure-at-spotify/), a Apple a partir de 2010 
+substituiu o MySQL pelo PostgreSQL em um de seus sistemas embarcados, o OS X Lion, e hoje, o Postgres é o banco de dados padrão no server do macOS X, desde a versão 10.7.
+O PostgreSQL também está em órbita, a [ISS](https://www.postgresql.org/message-id/E0A4DA8CB358A94E860A1C604DCE0482B297999DD7@NDJSSCC01.ndc.nasa.gov)(International 
+Space Station) utiliza um addon em conjunto com o SGBD.
 
 ### Oracle 23c
 
-### Cache Database
+O Oracle23c é a mais recente versão do banco de dados da Oracle. É um banco de dados convergente. como se auto-intitula, de modo simplificado é um banco de dados único que tem suporte nativo pra vários tipos de modelos de dados, documentos, grafos, e modelos relacionais.
+
+Um dos features inovador que o Oracle 23c traz é chamado de **Dualidade JSON Relacional** (JSON Relational Duality). Basicamente a empresa buscou trazer a unificação de vários modelos de dados. Sabemos que o modelo relacional pode se tornar mais complicado para trabalhar quando tratamos de tipos de dados complexos, já que os dados do mundo real nem sempre chegam em linhas e colunas.
+O que o JSON Relational Duality busca é a união do modelo de documentos com o relacional, aproveitando a melhor eficiência em armazenamento do relacional, com o melhor acesso que o modelo de documentos tem.
+![Armazenados em linhas - Acessados como documentos JSON](https://blogs.oracle.com/content/published/api/v1.1/assets/CONT7DBBE1CF4DE246D393F0E084C65C0A6F/Medium?cb=_cache_a595&format=jpg&channelToken=af5d837e3d34400dbe9ae6cec73ee9b7){width=500 height=500}
+
+Outro ponto de diferencial desse banco de dados são os Procedimentos Armazenados em JavaScript (JavaScript Stored Procedures) que facilitam a criação de aplicações em JS que utilizam do BD, com o principal ponto aqui sendo a diminuição de consultas ao banco de dados, já que os procedimentos estão escritos **no** banco de dados.
+
+Apesar da Oracle ser conhecida por ter seus planos de alto valor, o Oracle 23c está sendo diponibilizado de graça para developers.
+
+Como o 23c ainda está em fase de desenvolvimento não é fácil encontrar quais empresas e aplicações que o usam. Porém muitos titãs do mercado usam bancos de dado da Oracle, já que buscam armazenar oceanos de dados e com a maior segurança possível. O [Banco Santander](https://www.oracle.com/customers/banco-santander-brasil/) é um exemplo que buscou a Oracle para tratar e analisar os dados de seus clientes. Com o advento da pandemia causada pelo SARS-CoV-2 (coronavírus) a necessidade de videochamadas e *meetings* aumentou drasticamente, fazendo com que o [Zoom](https://www.oracle.com/customers/zoom/) buscasse apoio da Oracle, atualmente, o Zoom transfere cerca de 7 petabytes (1 petabyte = 1024 terabytes) de dados **por dia** pela infraestrutura dos servidores da Oracle.
+
+### Caché Database
+
+É descrito como um bando de dados de altíssimo desempenho pós-relacional. Aproveita o melhor dos dois mundos, sendo um banco de dados orientado a objetos e utilizando ainda assim a SQL. A InterSystems, empresa por trás do Caché Database, procurou facilitar a vida do desenvolvedor com a proposta do pós-relacional. A ideia é armazenar os dados da maneira mais natural possível, pra facilitar o acesso, que será dependente da aplicação, podendo surgir seja na forma de tabelas, registros ou documentos. Como os dados são armazenados de forma mais transparente é possível o usuário construir seu prórpio sistema de gerenciamento se for necessário.
+Com o Caché é possível acessar e montar tabelas de outros bancos de dados e devolver uma visão orientada a objetos.
+Uma curiosidade é que o Caché é usado para rastrear a posição e velocidade em tempo real de atletas em competições, o motivo da escolha sendo a sua eficiência, podendo ser explicada por seu kernel implementado em C e que sofre aprimoramentos em Assembly a mais de [25 anos](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwinwMzlv-L_AhW4qZUCHakBDIsQFnoECA4QAQ&url=https%3A%2F%2Fwww.cin.ufpe.br%2F~fdfd%2FMaterial%2Fcache%2FT1.10%2520Conhecendo%2520o%2520Cach%25C2%2582.pdf&usg=AOvVaw1Tbxhg8oJOhl8flTY0YZ_B&opi=89978449).
+
+O banco de dados da InterSystems é bastante utilizado por empresas no ramo bancário e de saúde. É usado para fazer monitoramento de pacientes no hospital e sistemas de gerenciamentos médico. Um exemplo é a [3M](https://www.intersystems.com/br/success-stories/3m-360-encompass-system-breakthrough-application-addresses-complex-reimbursement-challenges-in-healthcare/) que procurava aumentar a produtividade no ambiente  médico.
+
 
 ### Neo4j
 
@@ -183,6 +212,40 @@ Algumas das empresas e aplicações que [usam](https://neo4j.com/customers/)
 Neo4j são eBay, Comcast e NASA.
 
 ### SQL Server
+
+O SQL server surgiu da parceria entre Microsoft e Sybase (hoje em dia sob comando apenas da Microsoft) como um SGBD relacional tradicional. Como se manter no mercado ainda sendo puramente relacional? Como já diz o próprio nome, é um servidor que oferece ao usuário diversos serviços, utilizando até mesmo [machine learning e inteligência artificial](https://blog.arbit.com.br/microsoft-sql-server-entenda/) para a análise de dados. O banco de dados tem suporte dos tipos primitivos e alguns tipos compostos desde que sejam definidos pelo usuário. Seu uso é feito a partir da T-SQL uma variação da SQL com funcionalidades extras.
+Existe funções da T-SQL que buscam aumentar a flexibilidade do SQL, por exemplo, convertendo arquivos JSON em tabelas. O exemplo abaixo:
+
+```SQL
+DECLARE @json NVARCHAR(MAX);
+
+SET @json = N'[
+  {"id": 2, "info": {"name": "John", "surname": "Smith"}, "age": 25},
+  {"id": 5, "info": {"name": "Jane", "surname": "Smith", "skills": ["SQL", "C#", "Azure"]}, "dob": "2005-11-04T12:00:00"}
+]';
+
+SELECT id,
+    firstName,
+    lastName,
+    age,
+    dateOfBirth,
+    skill
+FROM OPENJSON(@json) WITH (
+    id INT 'strict $.id',
+    firstName NVARCHAR(50) '$.info.name',
+    lastName NVARCHAR(50) '$.info.surname',
+    age INT,
+    dateOfBirth DATETIME2 '$.dob',
+    skills NVARCHAR(MAX) '$.info.skills' AS JSON
+    )
+OUTER APPLY OPENJSON(skills) WITH (skill NVARCHAR(8) '$');
+```
+
+![A tabela resultante](image.png)
+
+Apesar de estar sob comando da Microsoft, existem versões de testes mais limitadas gratuitas. Para uma aplicação do mundo real tende a ser necessário uma assinatura. Uma das grandes desvantagens em usar o SQL Server é a sua pouca disponibilidade nos SOs (Apenas Windows e Linux). Em contrapartida, a falta de flexibilidade tanto nos sistemas operacionais como nos tipos de dados suportados implica na grande velocidade de performance.
+
+Algumas das empresas que usam o SQL Server em seu são [Vivo e Itaú](https://meunegocio.uol.com.br/blog/mysql-x-sql-server-x-mongodb-x-postgres-qual-banco-de-dados-escolher/).
 
 ### Firebase
 
@@ -356,4 +419,7 @@ McGraw-Hill Education, 2020.
   [aqui](https://neo4j.com/docs/)
 - **PostgreSQL Documentation**. Acessado em Junho de 2023. Disponível [aqui](https://www.postgresql.org/docs/current/)
 - **Which Major Companies Use PostgreSQL? What Do They Use It for?**. Jakub Romanowski, 2020. Disponível [aqui](https://learnsql.com/blog/companies-that-use-postgresql-in-business/)
-
+- **Database 23c**. Acessado em Junho de 2023. Disponível [aqui](https://www.oracle.com/database/23c/)
+- **Oracle Customer Successes**. Acessado em Junho de 2023. Disponível [aqui](https://www.oracle.com/customers/)
+- **InterSystems Caché Technology**. Acessado em Junho de 2023. Disponível [aqui](https://www.intersystems.com/cache/technology/)
+- **Conhecendo o Caché**. Amir Samary, 2003. Acessado em Junho de 2023. PDF Disponível [aqui](https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=web&cd=&ved=0CAIQw7AJahcKEwjg37vGw-L_AhUAAAAAHQAAAAAQAg&url=https%3A%2F%2Fwww.cin.ufpe.br%2F~fdfd%2FMaterial%2Fcache%2FT1.10%2520Conhecendo%2520o%2520Cach%25C2%2582.pdf&psig=AOvVaw0TAytitKkO2sr1HSRF4veJ&ust=1687923658940998&opi=89978449)
