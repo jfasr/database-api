@@ -143,7 +143,7 @@ experientes em banco de dados também acabam adotando o PostgreSQL.
 
 Algumas empresas que usam PostgreSQL são [Spotify](https://engineering.atspotify.com/2013/03/backend-infrastructure-at-spotify/), a Apple a partir de 2010 
 substituiu o MySQL pelo PostgreSQL em um de seus sistemas embarcados, o OS X Lion, e hoje, o Postgres é o banco de dados padrão no server do macOS X, desde a versão 10.7.
-O PostgreSQL também está em órbita, a [ISS](https://www.postgresql.org/message-id/E0A4DA8CB358A94E860A1C604DCE0482B297999DD7@NDJSSCC01.ndc.nasa.gov)(International 
+O PostgreSQL também está em órbita, a [ISS](https://www.postgresql.org/message-id/E0A4DA8CB358A94E860A1C604DCE0482B297999DD7@NDJSSCC01.ndc.nasa.gov) (International 
 Space Station) utiliza um addon em conjunto com o SGBD.
 
 ### Oracle 23c
@@ -152,7 +152,7 @@ O Oracle23c é a mais recente versão do banco de dados da Oracle. É um banco d
 
 Um dos features inovador que o Oracle 23c traz é chamado de **Dualidade JSON Relacional** (JSON Relational Duality). Basicamente a empresa buscou trazer a unificação de vários modelos de dados. Sabemos que o modelo relacional pode se tornar mais complicado para trabalhar quando tratamos de tipos de dados complexos, já que os dados do mundo real nem sempre chegam em linhas e colunas.
 O que o JSON Relational Duality busca é a união do modelo de documentos com o relacional, aproveitando a melhor eficiência em armazenamento do relacional, com o melhor acesso que o modelo de documentos tem.
-![Armazenados em linhas - Acessados como documentos JSON](https://blogs.oracle.com/content/published/api/v1.1/assets/CONT7DBBE1CF4DE246D393F0E084C65C0A6F/Medium?cb=_cache_a595&format=jpg&channelToken=af5d837e3d34400dbe9ae6cec73ee9b7){width=500 height=500}
+![Armazenados em linhas - Acessados como documentos JSON](https://i.im.ge/2023/06/27/07c2Cm.oracle.jpg){width=500 height=500}
 
 Outro ponto de diferencial desse banco de dados são os Procedimentos Armazenados em JavaScript (JavaScript Stored Procedures) que facilitam a criação de aplicações em JS que utilizam do BD, com o principal ponto aqui sendo a diminuição de consultas ao banco de dados, já que os procedimentos estão escritos **no** banco de dados.
 
@@ -241,7 +241,7 @@ FROM OPENJSON(@json) WITH (
 OUTER APPLY OPENJSON(skills) WITH (skill NVARCHAR(8) '$');
 ```
 
-![A tabela resultante](image.png)
+![A tabela resultante](https://i.im.ge/2023/06/27/07cUex.Screenshot-1-svg.png)
 
 Apesar de estar sob comando da Microsoft, existem versões de testes mais limitadas gratuitas. Para uma aplicação do mundo real tende a ser necessário uma assinatura. Uma das grandes desvantagens em usar o SQL Server é a sua pouca disponibilidade nos SOs (Apenas Windows e Linux). Em contrapartida, a falta de flexibilidade tanto nos sistemas operacionais como nos tipos de dados suportados implica na grande velocidade de performance.
 
