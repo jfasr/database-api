@@ -10,6 +10,9 @@ CREATE TYPE lojinha.raridade_item AS ENUM ('comum', 'incomum', 'raro', 'épico',
 DROP TYPE lojinha.tipo_item;
 CREATE TYPE lojinha.tipo_item AS ENUM ('campeão', 'skin', 'croma', 'ícone', 'emote', 'skin sentinela');
 
+DROP TYPE lojinha.dificuldade_campeao;
+CREATE TYPE lojinha.dificuldade_campeao AS ENUM ('fácil', 'médio', 'difícil');
+
 DROP TABLE lojinha.usuario;
 CREATE TABLE lojinha.usuario (
     email_primario text PRIMARY KEY,
@@ -40,9 +43,9 @@ CREATE TABLE lojinha.item (
     nome text 
         NOT NULL
         CONSTRAINT nome_unico UNIQUE,
-    tipo tipo_item NOT NULL,
+    tipo lojinha.tipo_item NOT NULL,
     data_lancamento date DEFAULT CURRENT_DATE,
-    raridade raridade_item NOT NULL,
+    raridade lojinha.raridade_item NOT NULL,
     preco_rp integer
         CONSTRAINT preco_positivo CHECK (preco_rp > 0)
         NOT NULL,
@@ -56,7 +59,7 @@ CREATE TABLE lojinha.item (
 
 DROP TABLE lojinha.item_carrinho;
 CREATE TABLE lojinha.item_carrinho (
-    status status_item_carrinho NOT NULL,
+    status lojinha.status_item_carrinho NOT NULL,
     carrinho_id_carrinho SERIAL
         REFERENCES lojinha.carrinho
         ON DELETE CASCADE,
@@ -83,6 +86,7 @@ CREATE TABLE lojinha.campeao (
         NOT NULL
         REFERENCES lojinha.classe_campeao
         ON DELETE SET DEFAULT,
+    dificuldade lojinha.dificuldade_campeao NOT NULL,
     classe_campeao_secundaria text
         REFERENCES lojinha.classe_campeao
         ON DELETE SET NULL
