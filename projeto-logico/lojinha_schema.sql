@@ -67,6 +67,7 @@ CREATE TABLE lojinha.item_carrinho (
         REFERENCES lojinha.item
         ON DELETE CASCADE,
     PRIMARY KEY (carrinho_id_carrinho, item_id_item)
+    data_adicao date DEFAULT CURRENT_DATE,
 );
 
 DROP TABLE lojinha.classe_campeao;
