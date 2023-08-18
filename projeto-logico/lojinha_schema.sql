@@ -66,8 +66,8 @@ CREATE TABLE lojinha.item_carrinho (
     item_id_item SERIAL
         REFERENCES lojinha.item
         ON DELETE CASCADE,
-    PRIMARY KEY (carrinho_id_carrinho, item_id_item)
     data_adicao date DEFAULT CURRENT_DATE,
+    PRIMARY KEY (carrinho_id_carrinho, item_id_item)
 );
 
 DROP TABLE lojinha.classe_campeao;
