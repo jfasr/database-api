@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
+    'rest_framework',
+    'api_web',
 ]
 
 MIDDLEWARE = [
@@ -76,10 +79,11 @@ WSGI_APPLICATION = 'lojinha.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'OPTIONS': {
-            'service': 'default_service',
-            'passfile': '.default_pgpass',
-        },
+        'HOST': 'lojinha-db.c9c5bcf9eeyi.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'professor',
+        'PASSWORD': 'professor',
+        'OPTIONS': {},
     }
 }
 
