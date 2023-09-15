@@ -23,7 +23,7 @@ CREATE TABLE lojinha.usuario (
 DROP TABLE lojinha.email_secundario_usuario;
 CREATE TABLE lojinha.email_secundario_usuario (
     email_secundario text PRIMARY KEY,
-    usuario_email_primario text
+    email_primario_usuario text
         NOT NULL
         REFERENCES lojinha.usuario
         ON DELETE CASCADE
@@ -32,7 +32,7 @@ CREATE TABLE lojinha.email_secundario_usuario (
 DROP TABLE lojinha.carrinho;
 CREATE TABLE lojinha.carrinho (
     id_carrinho SERIAL PRIMARY KEY,
-    usuario_email_primario text
+    email_usuario text
         REFERENCES lojinha.usuario
         ON DELETE SET DEFAULT
 );
@@ -60,14 +60,14 @@ CREATE TABLE lojinha.item (
 DROP TABLE lojinha.item_carrinho;
 CREATE TABLE lojinha.item_carrinho (
     status lojinha.status_item_carrinho NOT NULL,
-    carrinho_id_carrinho SERIAL
+    id_carrinho SERIAL
         REFERENCES lojinha.carrinho
         ON DELETE CASCADE,
-    item_id_item SERIAL
+    id_item SERIAL
         REFERENCES lojinha.item
         ON DELETE CASCADE,
     data_adicao date DEFAULT CURRENT_DATE,
-    PRIMARY KEY (carrinho_id_carrinho, item_id_item)
+    PRIMARY KEY (id_carrinho, id_item)
 );
 
 DROP TABLE lojinha.classe_campeao;
@@ -77,18 +77,18 @@ CREATE TABLE lojinha.classe_campeao (
 
 DROP TABLE lojinha.campeao;
 CREATE TABLE lojinha.campeao (
-    item_id_item SERIAL
+    id_campeao SERIAL
         NOT NULL
         REFERENCES lojinha.item
         ON DELETE CASCADE
         PRIMARY KEY,
-    classe_campeao_primaria text
+    classe_primaria text
         DEFAULT 'indefinida'
         NOT NULL
         REFERENCES lojinha.classe_campeao
         ON DELETE SET DEFAULT,
     dificuldade lojinha.dificuldade_campeao NOT NULL,
-    classe_campeao_secundaria text
+    classe_secundaria text
         REFERENCES lojinha.classe_campeao
         ON DELETE SET NULL
 );
@@ -100,28 +100,28 @@ CREATE TABLE lojinha.linha_skin (
 
 DROP TABLE lojinha.skin;
 CREATE TABLE lojinha.skin (
-    item_id_item SERIAL
+    id_item SERIAL
         NOT NULL
         REFERENCES lojinha.item (id_item)
         ON DELETE CASCADE
         PRIMARY KEY,
-    campeao_item_id_item SERIAL
+    id_campeao SERIAL
         NOT NULL
         REFERENCES lojinha.campeao
         ON DELETE CASCADE,
-    linha_skin_nome text
+    nome_linha_skin text
         REFERENCES lojinha.linha_skin
         ON DELETE SET NULL
 );
 
 DROP TABLE lojinha.croma;
 CREATE TABLE lojinha.croma (
-    item_id_item SERIAL
+    id_item SERIAL
         NOT NULL
         REFERENCES lojinha.item
         ON DELETE CASCADE
         PRIMARY KEY,
-    skin_item_id_item SERIAL
+    id_skin SERIAL
         NOT NULL
         REFERENCES lojinha.skin
         ON DELETE CASCADE
