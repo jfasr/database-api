@@ -79,10 +79,11 @@ WSGI_APPLICATION = 'lojinha.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'lojinha-db.c9c5bcf9eeyi.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': 'postgres',
         'USER': 'professor',
         'PASSWORD': 'professor',
+        'HOST': 'lojinha-db.c9c5bcf9eeyi.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
         'OPTIONS': {},
     }
 }
