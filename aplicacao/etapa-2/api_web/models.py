@@ -15,19 +15,18 @@ class Carrinho(models.Model):
     Carrinho de compras de um usuário.
     """
     id_carrinho = models.AutoField(primary_key=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.SET("deletado"))
-
+    email_usuario = models.ForeignKey(Usuario, on_delete=models.SET("deletado"))
 
 class Item(models.Model):
     """
     Item da loja.
     """
     class Raridade(models.TextChoices):
-        COMUM = "C"
-        INCOMUM = "I"
-        RARO = "R"
-        EPICO = "E"
-        LENDARIO = "L"
+        COMUM = "COMUM"
+        INCOMUM = "INCOMUM"
+        RARO = "RARO"
+        EPICO = "EPICO"
+        LENDARIO = "LENDARIO"
 
     class Tipo(models.TextChoices):
         CAMPEAO = "CAMPEAO"
@@ -41,7 +40,7 @@ class Item(models.Model):
     nome = models.CharField(max_length=30, null=False, unique=True)
     preco_rp = models.IntegerField(null=False)
     raridade = models.CharField(
-            max_length=1,
+            max_length=20,
             choices=Raridade.choices,
             null=False
     )
@@ -54,18 +53,21 @@ class Item(models.Model):
     desconto = models.DecimalField(
             default=1,
             null=False,
-            max_digits=2,
+            max_digits=4,
             decimal_places=2
     )
     preco_final = models.DecimalField(
             max_digits=10,
-            decimal_places=2
+            decimal_places=2,
+            blank=True,
+            null=True
     )
 
     def save(self, *args, **kwargs):
         # need to override save method for fields generated from other fields
-        preco_final = self.preco_rp * self.desconto
-        super(Item, self).save(*args, **kwargs) # call the "real" save method
+        self.preco_final = self.preco_rp * (1 - self.desconto / 100 )
+        # call the "real" save method
+        super(Item, self).save(*args, **kwargs)
 
 class ItemCarrinho(models.Model):
     """
