@@ -23,7 +23,7 @@ CREATE TABLE lojinha.usuario (
 DROP TABLE lojinha.email_secundario_usuario;
 CREATE TABLE lojinha.email_secundario_usuario (
     email_secundario text PRIMARY KEY,
-    email_primario_usuario text
+    email_primario text
         NOT NULL
         REFERENCES lojinha.usuario
         ON DELETE CASCADE
@@ -77,7 +77,7 @@ CREATE TABLE lojinha.classe_campeao (
 
 DROP TABLE lojinha.campeao;
 CREATE TABLE lojinha.campeao (
-    id_campeao SERIAL
+    id_item SERIAL
         NOT NULL
         REFERENCES lojinha.item
         ON DELETE CASCADE
