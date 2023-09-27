@@ -10,7 +10,7 @@ select * from item where raridade >= 'raro';
 select * from usuario where email_primario like '%@gmail.com';
 
 -- 3. operadores de conjuntos
--- todos os items que cujos nomes começam com 'Janna' OU possuem 'Neve' e 'Tempo'
+-- todos os items cujos nomes começam com 'Janna' OU possuem 'Neve' e 'Tempo'
 select * from item where nome like 'Janna%' union
  (select * from item where nome like '%Neve%' intersect
   select * from item where nome like '%Tempo%');

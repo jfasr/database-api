@@ -1,7 +1,7 @@
 # assumes the adapter is installed
 # otherwise, install with `$ pip install psycopg2-binary`
-import psycopg2
-from psycopg2.errors import UniqueViolation
+import psycopg as pg
+from psycopg.errors import UniqueViolation
 from string import ascii_letters, digits
 from random import choice, randint
 
@@ -15,10 +15,10 @@ def create_random_user():
 
 host = 'lojinha-db.c9c5bcf9eeyi.us-east-1.rds.amazonaws.com'
 dbname = 'postgres'
-user = password = 'professor'
+user = password = 'postgres'
 
 print(f'Conectando a {host}, no banco {dbname} como {user}...')
-conn = psycopg2.connect(host=host, dbname=dbname, user=user, password=password)
+conn = pg.connect(host=host, dbname=dbname, user=user, password=password)
 
 print('Conexão concluída')
 cur = conn.cursor()
